@@ -1,3 +1,12 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%-- <%@ page import="br.com.cafeina.chat.webserver.message.Message" %>
+<%@ page import="java.util.List" %> --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +15,10 @@
 	<link rel="icon" href="./assets/images/chat.png" />
 	<link rel="stylesheet" href="./assets/styles/chatstyle.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous" defer></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous" defer></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" defer></script>
+	<script src="./assets/scripts/chat.js" defer></script>
 </head>
 <body>
 	<div class="container-fluid mt-3">
@@ -73,11 +83,11 @@
 		                        </div>
 		                    </div>
 		                </div>
-		                <div class="chat-history chat-non-overflow">
+		                <div class="chat-history chat-non-overflow" id="chat-history">
 		                    <ul class="m-b-0">
 		                    
 		                    	<!-- MY MESSAGE -->
-		                        <li class="clearfix">		                            
+		                        <!-- <li class="clearfix">		                            
 		                            <div class="message my-message float-right"> 
 		                            	<h6 class="chat-message-username my-username text-start">Caroline</h6>
 		                            	<p class="message-text text-start"> Oi povo !!</p>
@@ -85,11 +95,10 @@
 		                                	<span class="message-data-time">10:10 AM, Today</span>
 		                            	</div>
 		                            </div>
-		                        </li>
+		                        </li> -->		                        
 		                        
-		                        
-		                        <!-- OTHER PERSON'S MESSAGE -->
-		                        <li class="clearfix">
+		                        <!-- OTHER PEOPLE'S MESSAGES -->
+		                        <!--  <li class="clearfix">
 		                        	<div class="message other-message float-left"> 
 		                        		<h6 class="chat-message-username other-username text-start">Mateus</h6>
 			                            <p class="message-text text-start">Teste</p>
@@ -97,27 +106,39 @@
 		                                	<span class="message-data-time">11:00 AM, Today</span>
 		                            	</div>
 		                            </div>     
-		                        </li>  
-   		                        <li class="clearfix">
-		                        	<div class="message other-message float-left"> 
-		                        		<h6 class="chat-message-username other-username text-start">Pedro</h6>
-			                            <p class="message-text text-start">
-				                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer augue sapien, pulvinar id dignissim eu, dictum sed dolor. Aliquam gravida, augue ac sagittis tempor, sapien elit sodales sapien, in accumsan magna eros feugiat diam. Sed finibus, nisl sed iaculis commodo, erat metus ullamcorper quam, a ullamcorper quam est eu nunc. Nulla ornare ut quam a varius. Etiam euismod dolor nec neque imperdiet iaculis. Praesent urna eros, commodo sed ex id, vehicula laoreet massa. Ut vitae tristique nisl, et faucibus turpis. Aenean condimentum libero id urna consectetur pulvinar. Ut ipsum enim, maximus fringilla sollicitudin non, pulvinar vitae lacus. Phasellus interdum dignissim dignissim. In gravida euismod sapien quis posuere.
-											Nam justo mauris, sagittis ac fringilla id, dignissim eu diam. Nunc feugiat purus vel tempor dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae felis metus. Mauris mollis, odio ut porttitor rhoncus, arcu dui fringilla lacus, sit amet maximus lacus ligula et nisl. Quisque interdum lobortis tellus, ac tincidunt velit vulputate ut. Aliquam eget vulputate ligula. Vivamus ac tincidunt libero, at suscipit tortor. Morbi lacinia luctus justo ac condimentum.
-											Donec porttitor consectetur hendrerit. In feugiat sed est vel sollicitudin. Curabitur eu diam viverra, fringilla eros in, rutrum turpis. Sed viverra metus vitae ligula volutpat, sit amet sollicitudin leo porta. Proin fringilla enim nibh, dignissim varius tortor condimentum sit amet. Sed vitae pulvinar dolor, a ultrices orci. Quisque facilisis fermentum dapibus.
-										</p>
-			                            <div class="message-data text-end">
-		                                	<span class="message-data-time">11:00 AM, Today</span>
-		                            	</div>
-		                            </div>                                    
-		                        </li>
+		                        </li>-->
+		                        
+		                       <c:forEach var="m" items="${messages}">
+		                      		<c:if test="${m.user.currentSessionUser}">
+										<li class="clearfix">		                            
+				                            <div class="message my-message float-right"> 
+				                            	<h6 class="chat-message-username my-username text-start">${m.user.userName}</h6>
+				                            	<p class="message-text text-start"> ${m.textString}</p>
+				                            	<div class="message-data text-end">
+				                                	<span class="message-data-time">${m.dateTime}</span>
+				                            	</div>
+				                            </div>
+			                        	</li>
+		                        	</c:if>
+		                      		<c:if test="${!m.user.currentSessionUser}">
+		                      			<li class="clearfix">
+				                        	<div class="message other-message float-left"> 
+				                        		<h6 class="chat-message-username other-username text-start">${m.user.userName}</h6>
+					                            <p class="message-text text-start"> ${m.textString} </p>
+					                            <div class="message-data text-end">
+				                                	<span class="message-data-time">${m.dateTime}</span>
+				                            	</div>
+				                            </div>                                    
+				                        </li>								
+		                        	</c:if>
+								</c:forEach>
 		                    </ul>
 		                </div>
 		                <form class="chat-message clearfix" method="post" action="">
 		                    <div class="input-group mb-3"> 
-							  <input type="text" class="form-control" placeholder="Escreva uma mensagem" aria-label="user message" aria-describedby="button-addon2">
-							  <button class="input-group-text btn btn-outline-secondary"><i class="fa fa-paperclip"></i></button>
-							  <button class="input-group-text btn btn-secondary" type="submit"><i class="fa fa-paper-plane"></i></button>
+							  <input type="text" class="form-control" placeholder="Escreva uma mensagem" aria-label="user message" name="user_form_input_message">
+							  <button class="input-group-text btn btn-outline-secondary" type="button"><i class="fa fa-paperclip"></i></button>
+							  <button class="input-group-text btn btn-secondary" type="submit" id="send-message"><i class="fa fa-paper-plane"></i></button>
 							</div>
 		            	</form>
 		        	</div>
