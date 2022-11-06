@@ -21,4 +21,8 @@ public class MessageRepository {
 			return this.allRoomMessages.get(this.allRoomMessages.size() - 1);
 		return null;
 	}
+	
+	public boolean isEmpty() {
+		return this.allRoomMessages.isEmpty();
+	}
 }
