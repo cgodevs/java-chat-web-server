@@ -140,7 +140,7 @@
 							  <button class="input-group-text btn btn-outline-secondary" type="button"><i class="fa fa-paperclip"></i></button>
 							  <button class="input-group-text btn btn-secondary" type="submit" id="send-message"><i class="fa fa-paper-plane"></i></button>
 							</div>
-		            	</form>
+		            	</form> <!-- TODO: validate field before sending a message -->
 		        	</div>
 		    	</div>
 			</div>
