@@ -54,7 +54,3 @@ public class ChatRoomServlet extends HttpServlet{
 		rd.forward(request, response);
 	}
 }
-//	this.allClientsPrintStreams = new ArrayList<>(); //in init()
-//	private List<PrintStream> allClientsPrintStreams;
-//	PrintWriter out = response.getWriter();			//in service()	
-

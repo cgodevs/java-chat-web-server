@@ -1,11 +1,7 @@
 package br.com.cafeina.chat.webserver.servlets;
 
 import java.io.IOException;
-//import java.io.PrintStream;
-//import java.io.PrintWriter;
 import java.net.ServerSocket;
-//import java.util.ArrayList;
-//import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import br.com.cafeina.chat.webserver.tasks.GetClientConnectionsTask;
 
@@ -17,7 +13,6 @@ public class ChatServer {	// Singleton class
 	private static ChatServer chatServer;
 	private ServerSocket serverSocket;
 	private AtomicBoolean isWaitingForClients;
-//	private List<PrintStream> allClientsPrintStreams;
 
 	private ChatServer() {
 //		this.allClientsPrintStreams = new ArrayList<>();
@@ -46,19 +41,6 @@ public class ChatServer {	// Singleton class
 	public String getIpAdress() {
 		return ipAdress;
 	}
-	
-//    public void shareMessageWithAll(String msg) { 
-//        for (PrintStream console : allClientsPrintStreams) 
-//        	console.println(msg);
-//    }
-
-	
-//	 TODO implement quit server method 
-//	 public void quit() throws IOException {
-////		 this.isOn.set(false); 
-//		 this.server.close(); 
-//	 }
-	 
 }
 
 
