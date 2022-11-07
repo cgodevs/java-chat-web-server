@@ -1,10 +1,13 @@
 package br.com.cafeina.chat.webserver.message;
 
+import br.com.cafeina.chat.webserver.client.Client;
+
 public class User {
-	private int id;  //TODO add it to the session later
 	private static int classId;
+	private int id;  
 	private String userName;
-	private boolean currentSessionUser; //TODO possibly remove later
+	private Client userClient;
+	private String sessionId; 
 
 	public User(){}
 	
@@ -13,12 +16,25 @@ public class User {
 		this.id = classId++;
 	}
 	
-	public User(String userName, boolean isCurrentSessionUser) {
+	public User(String userName, String sessionId) {
 		this.userName = userName;
-		this.currentSessionUser = isCurrentSessionUser;
+		this.sessionId = sessionId;
 		this.id = classId++;
 	}
 
+	public User(String userName, Client client) {
+		this.userName = userName;
+		this.id = classId++;
+		this.userClient = client;
+	}
+	
+	public User(String userName, String sessionId, Client client) {
+		this.userName = userName;
+		this.sessionId = sessionId;
+		this.id = classId++;
+		this.userClient = client;
+	}
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -30,13 +46,34 @@ public class User {
 	public int getId() {
 		return id;
 	}
-
-	public boolean getCurrentSessionUser() {
-		return currentSessionUser;
+	
+	public Client getUserClient() {
+		return userClient;
 	}
 
-	public void setCurrentSessionUser(boolean isCurrentSessionUser) {
-		this.currentSessionUser = isCurrentSessionUser;
-	}	
+	public void setUserClient(Client userClient) {
+		this.userClient = userClient;
+	}
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userName=" + userName + ", userClient=" + userClient + ", sessionId=" + sessionId
+				+ "]";
+	}
 	
+	@Override 
+	public boolean equals(Object o) {
+		return ((User)o).sessionId.equals(this.sessionId);
+	}
+	
+	//TODO override hashCode!
+
 }

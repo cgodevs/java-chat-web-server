@@ -25,5 +25,10 @@ public class Message {
 	public User getUser() {
 		return user;
 	}
+
+	@Override
+	public String toString() {
+		return "Message [textString=" + textString + ", dateTime=" + dateTime + ", user=" + user + "]";
+	}
 	
 }

@@ -5,8 +5,6 @@
 <%@ page import="java.util.List" %> --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,7 +107,7 @@
 		                        </li>-->
 		                        
 		                       <c:forEach var="m" items="${messages}">
-		                      		<c:if test="${m.user.currentSessionUser}">
+		                      		<c:if test="${m.user.sessionId eq thisSessionId}">
 										<li class="clearfix">		                            
 				                            <div class="message my-message float-right"> 
 				                            	<h6 class="chat-message-username my-username text-start">${m.user.userName}</h6>
@@ -120,7 +118,7 @@
 				                            </div>
 			                        	</li>
 		                        	</c:if>
-		                      		<c:if test="${!m.user.currentSessionUser}">
+		                      		<c:if test="${m.user.sessionId ne thisSessionId}">
 		                      			<li class="clearfix">
 				                        	<div class="message other-message float-left"> 
 				                        		<h6 class="chat-message-username other-username text-start">${m.user.userName}</h6>
@@ -134,9 +132,10 @@
 								</c:forEach>
 		                    </ul>
 		                </div>
-		                <form class="chat-message clearfix" method="post" action="">
+		                <form class="chat-message clearfix" method="post" action="chat-room">
 		                    <div class="input-group mb-3"> 
-							  <input type="text" class="form-control" placeholder="Escreva uma mensagem" aria-label="user message" name="user_form_input_message">
+							  <input type="text" class="form-control" placeholder="Escreva uma mensagem" aria-label="user message" name="user_form_input_message" autofocus>
+							  <input type="hidden" name="thisSessionId" value=${thisSessionId}/>
 							  <button class="input-group-text btn btn-outline-secondary" type="button"><i class="fa fa-paperclip"></i></button>
 							  <button class="input-group-text btn btn-secondary" type="submit" id="send-message"><i class="fa fa-paper-plane"></i></button>
 							</div>

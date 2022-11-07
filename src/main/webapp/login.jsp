@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="container">
-		<form class="bg-white rounded shadow-5-strong p-5" id="login-form" method="post" action="startServer">
+		<form class="bg-white rounded shadow-5-strong p-5" id="login-form" method="post" action="clientConnection">
 			<h4 class="text-center mb-2">Escolha seu nome de usuário</h4>
 			<!-- Email input -->
 			<div class="form-outline mb-2 mt-4">
@@ -27,7 +27,7 @@
 			  <label class="form-label" for="login_pw">Senha</label>
 			  <input type="password" id="login_pw" name="password" class="form-control" placeholder="Autenticação em construção" disabled/ >
 			</div>
-			
+			<input type="hidden" name="sessionId" value="<%=session.getId()%>" />
 			<!-- Submit button -->
 			<button type="submit" class="btn btn-success btn-block text-center">Entrar</button>
 		</form>
